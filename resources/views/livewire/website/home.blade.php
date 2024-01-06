@@ -12,7 +12,7 @@
                 <div class="join-now-box wow fadeInUp">
                     <div class="single-option">
                         <p class="title">
-                            I am a : {{ $number }}
+                            I am a : 
                         </p>
                         <div class="option">
                             <div class="s-input mr-3">

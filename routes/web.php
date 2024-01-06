@@ -1,8 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Livewire\Website\Home;
 use App\Livewire\Website\Auth\Register;
+use App\Livewire\Website\Auth\Login;
+use App\Livewire\Website\Member\MembersList;
+use App\Livewire\Website\Member\MyProfile;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +26,13 @@ use App\Livewire\Website\Auth\Register;
 
 Route::get('/', Home::class)->name('home');
 Route::get('/register', Register::class)->name('register');
+Route::get('/login', Login::class)->name('login');
+
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect(route('home'));
+})->name('logout');
+
+Route::get('/members', MembersList::class)->name('members-list');
+Route::get('/my-profile', MyProfile::class)->name('my-profile');
 
