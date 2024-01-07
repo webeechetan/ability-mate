@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('webiste') }}/assets/css/flaticon.css">
     <link rel="stylesheet" href="{{ asset('webiste') }}/assets/css/main.css">
     <link rel="stylesheet" href="{{ asset('webiste') }}/assets/css/responsive.css">
+
     @livewireStyles
 
     <link rel="shortcut icon" href="{{ asset('webiste') }}/assets/images/favicon.png" type="image/x-icon">
