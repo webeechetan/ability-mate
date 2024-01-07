@@ -5,6 +5,8 @@ namespace App\Livewire\Website\Member;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\Disability;
+use App\Models\DisabilityCategory;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
@@ -14,13 +16,13 @@ class MyProfile extends Component
 {
     public $user;
 
-    public $categories;
-    public $subcategories;
+    public $disability_categories;
+    public $disabilities;
 
     #[Validate('required', as: 'Disability')]
-    public $category_id;
+    public $disability_category_id;
     #[Validate('required', as: 'Disability Type')]
-    public $subcategory_id;
+    public $disability_id;
 
     public  $countries;
     public  $states;
@@ -40,14 +42,14 @@ class MyProfile extends Component
 
     public function mount()
     {
-        $this->categories = Category::all();
-        $this->subcategories = SubCategory::all();
+        $this->disability_categories = DisabilityCategory::all();
+        $this->disabilities = Disability::all();
         $this->countries = Country::all();
         $this->states = [];
         $this->cities = [];
         if(auth()->user()->detail){
-            $this->category_id = auth()->user()->detail->category_id;
-            $this->subcategory_id = auth()->user()->detail->sub_category_id;
+            $this->disability_category_id = auth()->user()->detail->disability_category_id;
+            $this->disability_id = auth()->user()->detail->disability_id;
             $this->country_id = auth()->user()->detail->country_id;
             $this->states = State::where('country_id', auth()->user()->detail->country_id)->get();
             $this->state_id = auth()->user()->detail->state_id;
@@ -63,9 +65,14 @@ class MyProfile extends Component
         return view('livewire.website.member.my-profile')->title('My Profile - '.env('APP_NAME'));
     }
 
-    public function updatedCategoryId($value)
+    // public function updatedCategoryId($value)
+    // {
+    //     $this->subcategories = SubCategory::where('category_id', $value)->get();
+    // }
+
+    public function updatedDisabilityCategoryId($value)
     {
-        $this->subcategories = SubCategory::where('category_id', $value)->get();
+        $this->disabilities = Disability::where('disability_category_id', $value)->get();
     }
 
     public function updatedCountryId($value)
@@ -79,9 +86,11 @@ class MyProfile extends Component
     }
 
     public function saveChanges(){
+
+        // dd($this->disability_category_id, $this->disability_id, $this->country_id, $this->state_id, $this->city_id);
         $this->validate([
-            'category_id' => 'required',
-            'subcategory_id' => 'required',
+            'disability_category_id' => 'required',
+            'disability_id' => 'required',
             'country_id' => 'required',
             'state_id' => 'required',
             'city_id' => 'required',
@@ -89,8 +98,8 @@ class MyProfile extends Component
 
         if(!auth()->user()->detail){
             auth()->user()->detail()->create([
-                'category_id' => $this->category_id,
-                'sub_category_id' => $this->subcategory_id,
+                'disability_category_id' => $this->disability_category_id,
+                'disability_id' => $this->disability_id,
                 'country_id' => $this->country_id,
                 'state_id' => $this->state_id,
                 'city_id' => $this->city_id,
@@ -98,8 +107,8 @@ class MyProfile extends Component
             ]);
         }else{
             auth()->user()->detail()->update([
-                'category_id' => $this->category_id,
-                'sub_category_id' => $this->subcategory_id,
+                'disability_category_id' => $this->disability_category_id,
+                'disability_id' => $this->disability_id,
                 'country_id' => $this->country_id,
                 'state_id' => $this->state_id,
                 'city_id' => $this->city_id,

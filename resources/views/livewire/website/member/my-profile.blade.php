@@ -186,13 +186,13 @@
                                 <div class="col-md-6">
                                     <div class="my-input-box">
                                         <label for="">Type of problem</label>
-                                        <select wire:model.change="category_id">
+                                        <select wire:model.change="disability_category_id">
                                             <option value="" >Select Type of problem</option>
-                                            @foreach ($categories as $category)
+                                            @foreach ($disability_categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('category_id')
+                                        @error('disability_category_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -200,13 +200,13 @@
                                 <div class="col-md-6">
                                     <div class="my-input-box">
                                         <label for="">Type of challenge</label>
-                                        <select id="" wire:model="subcategory_id">
+                                        <select id="" wire:model="disability_id">
                                             <option value=""  selected>Select Type of challenge</option>
-                                            @foreach ($subcategories as $category)
+                                            @foreach ($disabilities as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('subcategory_id')
+                                        @error('disability_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -404,6 +404,9 @@
                         </div>
                     </div>
                     <div class="buttons  mt-30">
+                        @if (session()->has('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
                         <button type="submit" class="custom-button" wire:click="saveChanges">Save Changes</button>
                         <button class="custom-button2">Discard All</button>
                     </div>
