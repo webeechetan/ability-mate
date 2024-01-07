@@ -7,11 +7,10 @@
                 </h2>
                 <ul class="breadcrumb-list extra-padding">
                     <li>
-                        <a href="index.html">
+                        <a wire:navigate href="{{ route('home') }}">
                             Home
                         </a>
                     </li>
-
                     <li>
                         Setting
                     </li>

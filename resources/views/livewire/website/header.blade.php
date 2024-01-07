@@ -8,48 +8,42 @@
             </div>
             <ul class="menu">
                 <li>
-                    <a href="#" class="active">Home</a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="index.html" class="active">Home One</a>
-                        </li>
-                        <li>
-                            <a href="index2.html">Home Two</a>
-                        </li>
-                    </ul>
+                    <a wire:navigate href="{{ route('home') }}" class="active">Home</a>
                 </li>
-                <li>
-                    @auth
+                @auth
+                    <li>
                         <a wire:navigate href="{{ route('members-list') }}">Members</a>
-                    @endauth
-                </li>
-                <li class="user-profile">
-                    <a href="#">
-                        <img src="{{ asset('webiste') }}/assets/images/user-demo.png" alt="">
-                    </a>
-                    <ul class="submenu">
-                        <li>
-                            @auth
-                                <a wire:navigate href="{{ route('my-profile') }}">Profile</a>
-                            @endauth
-                        </li>
-                        <li>
-                            @auth
-                                <a >Dashboard</a>
-                            @endauth
-                            @guest
-                                <a wire:navigate href="{{ route('login') }}">Login</a>
-                                <a wire:navigate href="{{ route('register') }}">Register</a>
-                            @endguest
-                            
-                        </li>
-                        <li>
-                            @auth
-                                <a href="{{ route('logout') }}">Logout</a>
-                            @endauth
-                        </li>
-                    </ul>
-                </li>
+                    </li>
+                @endauth
+
+                @guest
+                    <li>
+                        <a wire:navigate href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li>
+                        <a wire:navigate href="{{ route('register') }}">Register</a>
+                    </li>
+                @endguest
+                @auth
+                    <li class="user-profile">
+                        <a href="#">
+                            <img src="{{ asset('webiste') }}/assets/images/user-demo.png" alt="">
+                        </a>
+                        <ul class="submenu">
+                            <li>
+                                @auth
+                                    <a wire:navigate href="{{ route('my-profile') }}">Profile</a>
+                                @endauth
+                            </li>
+                            <li>
+                                @auth
+                                    <a href="{{ route('logout') }}">Logout</a>
+                                @endauth
+                            </li>
+                        </ul>
+                    </li>
+                @endauth
+
             </ul>
             <div class="header-bar d-lg-none">
                 <span></span>

@@ -28,7 +28,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-5">
-              <a href="index.html" class="backto-home"><i class="fas fa-chevron-left"></i> Back to {{ env('APP_NAME') }}</a>
+              <a wire:navigate href="{{ route('home') }}" class="backto-home"><i class="fas fa-chevron-left"></i> Back to {{ env('APP_NAME') }}</a>
             </div>
             <div class="col-lg-7 ">
               <div class="logo">

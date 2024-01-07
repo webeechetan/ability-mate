@@ -11,7 +11,6 @@
                             Home
                         </a>
                     </li>
-
                     <li>
                         Members
                     </li>
