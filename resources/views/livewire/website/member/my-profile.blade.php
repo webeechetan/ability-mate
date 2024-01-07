@@ -182,16 +182,46 @@
                         </div>
                         <div class="content">
                             <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="my-input-box">
+                                        <label for="">Type of problem</label>
+                                        <select wire:model.change="category_id">
+                                            <option value="" >Select Type of problem</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('category_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="my-input-box">
+                                        <label for="">Type of challenge</label>
+                                        <select id="" wire:model="subcategory_id">
+                                            <option value=""  selected>Select Type of challenge</option>
+                                            @foreach ($subcategories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('subcategory_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="my-input-box">
                                         <label for="">Profile Name</label>
-                                        <input type="text" placeholder="Profile Name">
+                                        <input type="text" placeholder="Profile Name" disabled value="{{ auth()->user()->name }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="my-input-box">
                                         <label for="">Public Email</label>
-                                        <input type="text" placeholder="Public Email">
+                                        <input type="text" placeholder="Public Email" disabled value="{{ auth()->user()->email }}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -199,28 +229,49 @@
                                         <textarea name="" placeholder="Write a little description about you..."></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="my-input-box">
                                         <label for="">Country</label>
-                                        <select name="" id="">
-                                            <option value="" disabled selected>Select Country</option>
-                                            <option value="">United State</option>
+                                        <select wire:model.change="country_id">
+                                            @foreach ($countries as $country)
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                            @endforeach
                                         </select>
+                                        @error('country_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="my-input-box">
+                                        <label for="">State</label>
+                                        <select wire:model.change="state_id">
+                                            @foreach ($states as $state)
+                                                <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('state_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="my-input-box">
                                         <label for="">City</label>
-                                        <select name="" id="">
-                                            <option value="" disabled selected>Select City</option>
-                                            <option value="">New Work</option>
+                                        <select wire:model="city_id">
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                            @endforeach
                                         </select>
+                                        @error('city_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="my-input-box">
                                         <label for="">Birthday</label>
-                                        <input type="date" >
+                                        <input type="date" disabled value="{{ auth()->user()->dob }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -353,7 +404,7 @@
                         </div>
                     </div>
                     <div class="buttons  mt-30">
-                        <button type="submit" class="custom-button">Save Changes</button>
+                        <button type="submit" class="custom-button" wire:click="saveChanges">Save Changes</button>
                         <button class="custom-button2">Discard All</button>
                     </div>
                 </div>

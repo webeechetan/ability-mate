@@ -4,18 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\State;
 
-class UserDetail extends Model
+
+class Country extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'category_id',
-        'sub_category_id',
-        'country_id',
-        'state_id',
-        'city_id',
-        'address',
+        'name',
     ];
+
+    public function states()
+    {
+        return $this->hasMany(State::class);
+    }
 }
